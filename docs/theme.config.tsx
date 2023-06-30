@@ -112,13 +112,6 @@ const config: DocsThemeConfig = {
   //     </a>
   //   )
   // },
-  editLink: {
-    text: 'Edit this page on GitHub →'
-  },
-  feedback: {
-    content: 'Question? Give us feedback →',
-    labels: 'feedback'
-  },
   sidebar: {
     titleComponent({ title, type }) {
       if (type === 'separator') {

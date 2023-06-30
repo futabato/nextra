@@ -118,16 +118,6 @@ export const themeSchema = z.strictObject({
     icon: z.custom<ReactNode | FC>(...reactNode),
     link: z.string().startsWith('https://').optional()
   }),
-  search: z.strictObject({
-    component: z.custom<
-      ReactNode | FC<{ className?: string; directories: Item[] }>
-    >(...reactNode),
-    emptyResult: z.custom<ReactNode | FC>(...reactNode),
-    error: z.string().or(z.function().returns(z.string())),
-    loading: z.custom<ReactNode | FC>(...reactNode),
-    // Can't be React component
-    placeholder: z.string().or(z.function().returns(z.string()))
-  }),
   serverSideError: z.strictObject({
     content: z.custom<ReactNode | FC>(...reactNode),
     labels: z.string()
@@ -171,13 +161,6 @@ const LOADING_LOCALES: Record<string, string> = {
   fr: 'Сhargement',
   ru: 'Загрузка',
   'zh-CN': '正在加载'
-}
-
-const PLACEHOLDER_LOCALES: Record<string, string> = {
-  'en-US': 'Search documentation',
-  fr: 'Rechercher documents',
-  ru: 'Поиск документации',
-  'zh-CN': '搜索文档'
 }
 
 export const DEFAULT_THEME: DocsThemeConfig = {
@@ -286,35 +269,6 @@ export const DEFAULT_THEME: DocsThemeConfig = {
         <span className="nx-sr-only">GitHub</span>
       </>
     )
-  },
-  search: {
-    component: function Search({ className, directories }) {
-      const config = useConfig()
-      return config.flexsearch ? (
-        <Flexsearch className={className} />
-      ) : (
-        <MatchSorterSearch className={className} directories={directories} />
-      )
-    },
-    emptyResult: (
-      <span className="nx-block nx-select-none nx-p-8 nx-text-center nx-text-sm nx-text-gray-400">
-        No results found.
-      </span>
-    ),
-    error: 'Failed to load search index.',
-    loading: function useLoading() {
-      const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
-      const text =
-        (locale && LOADING_LOCALES[locale]) || LOADING_LOCALES[defaultLocale]
-      return <>{text}…</>
-    },
-    placeholder: function usePlaceholder() {
-      const { locale, defaultLocale = DEFAULT_LOCALE } = useRouter()
-      const text =
-        (locale && PLACEHOLDER_LOCALES[locale]) ||
-        PLACEHOLDER_LOCALES[defaultLocale]
-      return `${text}…`
-    }
   },
   serverSideError: {
     content: 'Submit an issue about error in url →',
