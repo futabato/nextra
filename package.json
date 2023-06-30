@@ -1,15 +1,4 @@
 {
-  "name": "@futabato/nextra",
-  "author": "01futabato10@gmail.com",
-  "license": "MIT",
-  "version": "0.0.6",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/futabato/nextra/packages/nextra.git"
-  },
   "packageManager": "pnpm@8.6.5",
   "scripts": {
     "build": "turbo run build:tailwind build --filter=./packages/\\*",
