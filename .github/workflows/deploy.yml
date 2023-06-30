@@ -28,6 +28,9 @@ jobs:
      # 必要なモジュール（typescript）をインストール
      - name: install node_modules
        run: npm install
+    
+     - name: install node_modules
+       run: npm run build      
 
      # パッケージとして公開する
      - name: publish
